@@ -1,166 +1,317 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agendando Passaporte</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificação de Segurança - Passaporte Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    body {
-      min-height: 100vh;
-      background: #f2f2f2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+  html, body {
+    height: 100%;
+  }
 
-    .cookie-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 36px 32px;
-      max-width: 440px;
-      width: 100%;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-      text-align: center;
-    }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #eef1f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: #1a2744;
+  }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
+  .card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 4px 24px rgba(26, 39, 68, 0.06);
+    text-align: center;
+  }
 
-    .logo-icon {
-      width: 56px;
-      height: 56px;
-      flex-shrink: 0;
-    }
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
 
-    .logo-text {
-      text-align: left;
-      line-height: 1.1;
-    }
+  .logo-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
 
-    .logo-text .line1 {
-      font-size: 18px;
-      font-weight: 400;
-      color: #2d2d2d;
-      font-style: italic;
-      display: block;
-    }
+  .logo-text {
+    text-align: left;
+    line-height: 1.1;
+  }
 
-    .logo-text .line2 {
-      font-size: 24px;
-      font-weight: 800;
-      color: #1a1a1a;
-      letter-spacing: 0.5px;
-      display: block;
-    }
+  .logo-text .top {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a2744;
+    letter-spacing: 0.2px;
+  }
 
-    .title {
-      font-size: 22px;
-      font-weight: 700;
-      color: #1a1a1a;
-      margin-bottom: 12px;
-    }
+  .logo-text .bottom {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a2744;
+    letter-spacing: -0.5px;
+    margin-top: 2px;
+  }
 
-    .description {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.5;
-      margin-bottom: 24px;
-    }
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a2744;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
 
-    .buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
+  .subtitle {
+    font-size: 15px;
+    color: #6b7a99;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 28px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    .btn {
-      flex: 1;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #ffffff;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+  .checkbox-container {
+    border: 1px solid #d8dee9;
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #ffffff;
+    user-select: none;
+  }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.05);
-    }
+  .checkbox-container:hover {
+    border-color: #b5c0d4;
+  }
 
-    .btn-accept {
-      background: linear-gradient(180deg, #2ecc71, #27ae60);
-    }
+  .checkbox-container.checked {
+    border-color: #1a2744;
+    background: #f4f6fb;
+  }
 
-    .btn-reject {
-      background: linear-gradient(180deg, #e74c3c, #c0392b);
-    }
+  .checkbox-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 
-    @media (max-width: 480px) {
-      .cookie-card {
-        padding: 28px 20px;
-      }
-      .title { font-size: 20px; }
-      .buttons { flex-direction: column; }
+  .checkbox {
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid #c4ccdb;
+    border-radius: 4px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .checkbox-container.checked .checkbox {
+    background: #1a2744;
+    border-color: #1a2744;
+  }
+
+  .checkbox svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .checkbox-container.checked .checkbox svg {
+    opacity: 1;
+  }
+
+  .checkbox-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a2744;
+  }
+
+  .verify-text {
+    font-size: 13px;
+    color: #8a94a8;
+    font-weight: 400;
+  }
+
+  .button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    background: #c8cdd6;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: not-allowed;
+    transition: all 0.2s ease;
+    margin-bottom: 20px;
+  }
+
+  .button.active {
+    background: #1a2744;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(26, 39, 68, 0.25);
+  }
+
+  .button.active:hover {
+    background: #0f1a33;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 39, 68, 0.3);
+  }
+
+  .footer {
+    font-size: 13px;
+    color: #8a94a8;
+    font-weight: 400;
+  }
+
+  .loading {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #e5e9f0;
+    border-top-color: #1a2744;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  .checkbox-container.loading-state .loading {
+    display: block;
+  }
+
+  .checkbox-container.loading-state .checkbox {
+    display: none;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 480px) {
+    .card {
+      padding: 36px 24px;
     }
-  </style>
+    h1 { font-size: 21px; }
+    .subtitle { font-size: 14px; }
+  }
+</style>
 </head>
 <body>
-  <div class="cookie-card">
-    <div class="logo">
-      <!-- Ícone simples em SVG: celular com globo (tema viagem/documento) -->
-      <svg class="logo-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="10" y="6" width="36" height="54" rx="6" ry="6" fill="#1e3a8a"/>
-        <rect x="14" y="12" width="28" height="38" rx="2" ry="2" fill="#ffffff"/>
-        <circle cx="44" cy="36" r="14" fill="#22c55e" stroke="#ffffff" stroke-width="2"/>
-        <path d="M30 36 h28 M44 22 v28 M34 28 q10 8 20 0 M34 44 q10 -8 20 0" stroke="#ffffff" stroke-width="1.5" fill="none"/>
-        <circle cx="28" cy="56" r="2" fill="#ffffff"/>
-        <path d="M20 20 l4 4 l8 -8" stroke="#f59e0b" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <div class="logo-text">
-        <span class="line1">Agendando</span>
-        <span class="line2">PASSAPORTE</span>
-      </div>
-    </div>
 
-    <h1 class="title">Configuração de Cookies</h1>
-    <p class="description">
-      Este site utiliza cookies para oferecer a melhor experiência.<br>
-      Escolha sua configuração preferida.
-    </p>
-
-    <div class="buttons">
-      <a href="#" class="btn btn-accept" id="btnAccept">Aceitar Cookies</a>
-      <a href="#" class="btn btn-reject" id="btnReject">Recusar Cookies</a>
+<div class="card">
+  <div class="logo">
+    <svg class="logo-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <!-- Círculo externo -->
+      <circle cx="24" cy="24" r="21" fill="#ffffff" stroke="#1a2744" stroke-width="2"/>
+      
+      <!-- Marcações dos pontos cardeais (traços pequenos) -->
+      <line x1="24" y1="5" x2="24" y2="8" stroke="#1a2744" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="24" y1="40" x2="24" y2="43" stroke="#1a2744" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="5" y1="24" x2="8" y2="24" stroke="#1a2744" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="40" y1="24" x2="43" y2="24" stroke="#1a2744" stroke-width="1.5" stroke-linecap="round"/>
+      
+      <!-- Marcações diagonais (pequenas) -->
+      <line x1="10.5" y1="10.5" x2="12.5" y2="12.5" stroke="#1a2744" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="37.5" y1="10.5" x2="35.5" y2="12.5" stroke="#1a2744" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="10.5" y1="37.5" x2="12.5" y2="35.5" stroke="#1a2744" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="37.5" y1="37.5" x2="35.5" y2="35.5" stroke="#1a2744" stroke-width="1.2" stroke-linecap="round"/>
+      
+      <!-- Ponteiro da bússola (losango: Norte vermelho/azul, Sul branco) -->
+      <!-- Ponteiro Norte (apontando pra cima) -->
+      <path d="M 24 24 L 20 24 L 24 10 L 28 24 Z" fill="#1a2744"/>
+      <path d="M 24 24 L 24 10 L 28 24 Z" fill="#2a3d5f"/>
+      
+      <!-- Ponteiro Sul (apontando pra baixo) -->
+      <path d="M 24 24 L 20 24 L 24 38 L 28 24 Z" fill="#d4d8e0"/>
+      <path d="M 24 24 L 24 38 L 28 24 Z" fill="#e8ebf0"/>
+      
+      <!-- Pino central -->
+      <circle cx="24" cy="24" r="2" fill="#1a2744"/>
+      <circle cx="24" cy="24" r="0.8" fill="#ffcb05"/>
+    </svg>
+    <div class="logo-text">
+      <div class="top">Passaporte</div>
+      <div class="bottom">BRASIL</div>
     </div>
   </div>
 
-  <script>
-    // Troque a URL abaixo pela URL de destino da sua oferta
-    const URL_DESTINO = "https://guiapassaportedoc.com/";
+  <h1>Verificação de Segurança</h1>
+  <p class="subtitle">Por favor, confirme que você não é um robô para continuar.</p>
 
-    document.getElementById('btnAccept').setAttribute('href', URL_DESTINO);
-    document.getElementById('btnReject').setAttribute('href', URL_DESTINO);
-  </script>
+  <div class="checkbox-container" id="checkboxContainer">
+    <div class="checkbox-left">
+      <div class="checkbox">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 7L5.5 10.5L12 3.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="loading"></div>
+      <span class="checkbox-label">Não sou um robô</span>
+    </div>
+    <span class="verify-text">Verificação</span>
+  </div>
+
+  <button class="button" id="accessButton" disabled>Acessar Conteúdo</button>
+
+  <p class="footer">Protegido por verificação de segurança</p>
+</div>
+
+<script>
+  const container = document.getElementById('checkboxContainer');
+  const button = document.getElementById('accessButton');
+  let verified = false;
+
+  container.addEventListener('click', () => {
+    if (verified) return;
+
+    // Estado de loading
+    container.classList.add('loading-state');
+
+    setTimeout(() => {
+      container.classList.remove('loading-state');
+      container.classList.add('checked');
+      button.classList.add('active');
+      button.disabled = false;
+      verified = true;
+    }, 1200);
+  });
+
+  button.addEventListener('click', () => {
+    if (!verified) return;
+    // Redirecionamento - substitua pelo seu link de destino
+    window.location.href = '#';
+  });
+</script>
+
 </body>
 </html>
